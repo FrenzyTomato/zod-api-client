@@ -1,0 +1,31 @@
+{
+  "openapi": "3.1.0",
+  "info": { "title": "Items", "version": "1.0.0" },
+  "paths": {
+    "/items/{itemId}": {
+      "get": {
+        "tags": ["items"],
+        "operationId": "getItem",
+        "parameters": [{ "name": "itemId", "in": "path", "required": true, "schema": { "type": "string" } }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["kind", "label"],
+                  "properties": {
+                    "kind": { "const": "item" },
+                    "label": { "type": ["string", "null"] },
+                    "quantity": { "type": "integer", "exclusiveMinimum": 0 }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

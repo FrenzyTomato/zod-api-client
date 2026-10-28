@@ -1,0 +1,39 @@
+{
+  "swagger": "2.0",
+  "info": { "title": "Pets", "version": "1.0.0" },
+  "host": "example.com",
+  "basePath": "/v1",
+  "schemes": ["https"],
+  "paths": {
+    "/pets/{petId}": {
+      "get": {
+        "tags": ["pets"],
+        "operationId": "getPet",
+        "produces": ["application/json"],
+        "parameters": [
+          { "name": "petId", "in": "path", "required": true, "type": "string" },
+          { "name": "verbose", "in": "query", "required": false, "type": "boolean" }
+        ],
+        "responses": { "200": { "description": "OK", "schema": { "$ref": "#/definitions/Pet" } } }
+      }
+    },
+    "/pets": {
+      "post": {
+        "tags": ["pets"],
+        "operationId": "createPet",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{ "name": "body", "in": "body", "required": true, "schema": { "$ref": "#/definitions/NewPet" } }],
+        "responses": { "200": { "description": "OK", "schema": { "$ref": "#/definitions/Pet" } } }
+      }
+    }
+  },
+  "definitions": {
+    "NewPet": { "type": "object", "required": ["name"], "properties": { "name": { "type": "string" } } },
+    "Pet": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": { "id": { "type": "integer" }, "name": { "type": "string" } }
+    }
+  }
+}
